@@ -5,10 +5,12 @@ public class Projectile : MonoBehaviour
 {
     #region fields
     [HideInInspector] public Vector3 direction;
+    [HideInInspector] public ObjectPool pool;
     [SerializeField] private float speed = 5;
+    [SerializeField] private float activeTime = 5f;
     #endregion
 
-    private void Start()
+    private void OnEnable()
     {
         StartCoroutine(nameof(WaitToDie));
     }
@@ -20,7 +22,8 @@ public class Projectile : MonoBehaviour
 
     IEnumerator WaitToDie()
     {
-        yield return new WaitForSeconds(4);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(activeTime);
+        pool.AddPooledObject(gameObject);
+        gameObject.SetActive(false);
     }
 }

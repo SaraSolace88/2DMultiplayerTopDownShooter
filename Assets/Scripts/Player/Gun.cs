@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class Gun : MonoBehaviour, Weapon
 {
     #region fields
-    [SerializeField] private GameObject projectile;
+    [SerializeField] private ObjectPool pool;
     [SerializeField] private float weaponRate = .5f;
     private InputSystem pInput;
     private bool bActive, bFire;
@@ -33,8 +33,14 @@ public class Gun : MonoBehaviour, Weapon
 
     private void Attack()
     {
-        GameObject g = Instantiate(projectile, transform.position, Quaternion.identity);
-        g.GetComponent<Projectile>().direction = gameObject.GetComponent<PlayerMovement>().dirHistory;
+        GameObject g = pool.GetPooledObject();
+        if (g)
+        {
+            g.gameObject.SetActive(true);
+            g.gameObject.transform.position = gameObject.transform.position;
+            g.GetComponent<Projectile>().pool = pool;
+            g.GetComponent<Projectile>().direction = gameObject.GetComponent<PlayerMovement>().dirHistory;
+        }
     }
 
     IEnumerator Firing()
