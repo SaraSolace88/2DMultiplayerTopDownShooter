@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 934691685587626818}
   - component: {fileID: 952094064754344828}
   - component: {fileID: 6254912000320581137}
+  - component: {fileID: 7899334545491492200}
+  - component: {fileID: 2973512916971324825}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -117,5 +119,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39487785c31cea94bb304c708128af57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 6269455646182847484, guid: bf14aaf0dbe24fc4898af761083b166b, type: 3}
+  pool: {fileID: 0}
   weaponRate: 0.5
+--- !u!114 &7899334545491492200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128933206942438451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3174cdbafc81b4f8af51dccfd9eb20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bPlayer: 1
+  score: 0
+  maxHealth: 10
+  healthBar: {fileID: 0}
+  currentHealth: 0
+--- !u!61 &2973512916971324825
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128933206942438451}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
