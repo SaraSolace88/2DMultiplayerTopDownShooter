@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -20,9 +21,20 @@ public class Projectile : MonoBehaviour
         transform.localPosition += direction * speed * Time.deltaTime;
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        StopCoroutine(nameof(WaitToDie));
+        DestroyProjectile();
+    }
+
     IEnumerator WaitToDie()
     {
         yield return new WaitForSeconds(activeTime);
+        DestroyProjectile();
+    }
+
+    private void DestroyProjectile()
+    {
         pool.AddPooledObject(gameObject);
         gameObject.SetActive(false);
     }

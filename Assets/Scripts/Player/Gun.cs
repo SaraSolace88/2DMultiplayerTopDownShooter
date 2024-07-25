@@ -8,6 +8,7 @@ public class Gun : MonoBehaviour, Weapon
     [SerializeField] private ObjectPool pool;
     [SerializeField] private float weaponRate = .5f;
     private InputSystem pInput;
+    private GameObject currBullet;
     private bool bActive, bFire;
     #endregion
 
@@ -33,14 +34,12 @@ public class Gun : MonoBehaviour, Weapon
 
     private void Attack()
     {
-        GameObject g = pool.GetPooledObject();
-        if (g)
-        {
-            g.gameObject.SetActive(true);
-            g.gameObject.transform.position = gameObject.transform.position;
-            g.GetComponent<Projectile>().pool = pool;
-            g.GetComponent<Projectile>().direction = gameObject.GetComponent<PlayerMovement>().dirHistory;
-        }
+        currBullet.gameObject.layer = gameObject.layer;
+        currBullet.tag = gameObject.tag;
+        currBullet.gameObject.transform.position = gameObject.transform.position + gameObject.GetComponent<PlayerMovement>().dirHistory;
+        currBullet.GetComponent<Projectile>().pool = pool;
+        currBullet.GetComponent<Projectile>().direction = gameObject.GetComponent<PlayerMovement>().dirHistory;
+        currBullet.gameObject.SetActive(true);
     }
 
     IEnumerator Firing()
@@ -50,7 +49,12 @@ public class Gun : MonoBehaviour, Weapon
             yield return new WaitForEndOfFrame();
             if (bFire)
             {
-                Attack();
+                currBullet = pool.GetPooledObject();
+                if (currBullet)
+                {
+                    
+                    Attack();
+                }
                 yield return new WaitForSeconds(weaponRate);
             }
         }
